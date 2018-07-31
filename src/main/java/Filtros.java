@@ -25,15 +25,12 @@ public class Filtros { //para aplicar filtros
             }
         });
 
-
         afterAfter("*",(request, response) -> {
-            System.out.println("estoy aqui... : " + response.raw().getStatus() );
+           // System.out.println("estoy aqui... : " + response.raw().getStatus() );
             if (response.raw().getStatus() == 404) {
                 response.redirect("/Page404Error.html");
             }
         });
-
-
 
     }
 

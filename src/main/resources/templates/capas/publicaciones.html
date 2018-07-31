@@ -36,6 +36,13 @@
                     <div  th:if="${publicacion.naturaleza} == 'PUBLICACION'">
                         <p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
                     </div>
+                    <div  th:if="${publicacion.naturaleza} == 'UBICACION'">
+                        <h6>Ha compartido su ubicación</h6>
+                        <div class="post-thumb">
+                            <img th:src="${publicacion.img}" alt="photo">
+                        </div>
+                        <p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+                    </div>
                     <div  th:if="${publicacion.naturaleza} == 'FOTO'">
                         <h6>Ha publicado una imagen:</h6>
                         <div class="post-thumb">

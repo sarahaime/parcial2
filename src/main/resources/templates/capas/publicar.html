@@ -31,7 +31,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active" id="post_tab" role="tabpanel" aria-expanded="true">
-                <form action="/inicio" method="post"  enctype='multipart/form-data'>
+                <form action="/publicacion" method="post"  enctype='multipart/form-data'>
                     <input th:if="${amigo}" type="hidden" name="muro" th:value="${amigo.id}">
                     <input th:unless="${amigo}" type="hidden" name="muro" th:value="${usuario.id}">
                     <div class="author-thumb">
@@ -71,17 +71,23 @@
             </div>
 
             <div class="tab-pane" id="ubicacion_tab" role="tabpanel" aria-expanded="true">
-                <form action="/inicio" method="post">
+                <form action="/ubicacion" method="post">
                     <input th:if="${amigo}" type="hidden" name="muro" th:value="${amigo.id}">
                     <input th:unless="${amigo}" type="hidden" name="muro" th:value="${usuario.id}">
                     <div class="author-thumb">
                         <img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
                     </div>
                     <div class="form-group with-icon label-floating is-empty">
-                        <label class="control-label">¿Qué haces aquí?</label>
-                        <textarea class="form-control" placeholder="" name="descripcion" required></textarea>
+                        <br>
+                        <div align="center">
+                            <img id="mapa" name="mapa" src="img/map-marker.png">
+                        </div>
+                        <br>
+                    </div>
+                    <div class="form-group with-icon label-floating is-empty">
+                       <label class="control-label">¿Qué haces aquí..?</label>
+                        <input class="form-control" placeholder="" name="descripcion" required>
                         <input hidden name="ubicacion"  id="ubicacion">
-                        <img id="mapa" name="mapa" src="img/avatar62-sm.jpg">
                     </div>
                     <div class="add-options-message">
                         <button type="submit" class="btn btn-primary btn-md-2">Compartir Ubicación</button>
@@ -102,16 +108,18 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
+            alert("Tu equipo no soporta la geo-localización");
         }
     }
 
     function showPosition(position) {
-
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
-        var  fuente = "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=300x300&maptype=roadmap&markers=color:red%7Clabel:A%7C" + lat + "," + lng + "&sensor=false";
+
+        var  fuente = "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=300x300&maptype=roadmap&markers=color:red%7Clabel:A%7C" +lat + "," + lng + "&sensor=false&key=AIzaSyCrJTAZlsloZVcfc_IGcvwZEwWL5GxH_mM";
         console.log(fuente);
-        $("#mapa").attr("src",fuente);
+
+        $("#mapa").attr("src", fuente);
+        $("#ubicacion").val(fuente);
     }
 </script>

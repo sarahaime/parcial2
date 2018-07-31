@@ -147,7 +147,7 @@ public class ManejoRutasShant {
             return renderThymeleaf(modelo,"/inicio");
         });
 
-        post("/inicio", (request, response) -> {
+        post("/publicacion", (request, response) -> {
 
             //super importante, para leer los campos ya se se codifican diferente gracias a la imagen
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
@@ -171,6 +171,23 @@ public class ManejoRutasShant {
 
             PublicacionServices.getInstancia().crear(publicacion);
 
+
+            response.redirect("/inicio");
+
+            return "";
+        });
+
+        post("/ubicacion", (request, response) -> {
+            String descripcion = request.queryParams("descripcion");
+            Publicacion publicacion = new Publicacion();
+            publicacion.setDescripcion(descripcion);
+            publicacion.setUsuario(UsuarioServices.getLogUser(request));
+            publicacion.setFecha(new Date());
+            String img = request.queryParams("ubicacion");
+            publicacion.setImg(img);
+            publicacion.setMuro_de(Long.parseLong(request.queryParams("muro")));
+            publicacion.setNaturaleza("UBICACION");
+            PublicacionServices.getInstancia().crear(publicacion);
 
             response.redirect("/inicio");
 
