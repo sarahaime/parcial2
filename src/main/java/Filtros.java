@@ -2,8 +2,7 @@
 import modelos.Usuario;
 import services.UsuarioServices;
 
-import static spark.Spark.before;
-import static spark.Spark.halt;
+import static spark.Spark.*;
 
 public class Filtros { //para aplicar filtros
     public void aplicarFiltros(){
@@ -23,6 +22,14 @@ public class Filtros { //para aplicar filtros
                 //parada del request, enviando un codigo.
                 response.redirect("/login");
                 halt(200, "No tiene permisos para acceder..");
+            }
+        });
+
+
+        afterAfter("*",(request, response) -> {
+            System.out.println("estoy aqui... : " + response.raw().getStatus() );
+            if (response.raw().getStatus() == 404) {
+                response.redirect("/Page404Error.html");
             }
         });
 
