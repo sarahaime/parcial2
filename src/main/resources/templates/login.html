@@ -45,7 +45,10 @@
 			<div class="landing-content">
 				<h1> Bienvenido a la red social con Spark</h1>
 				<p>Somos una red social hecha con Spark. Sientete libre, comparte tus publicaciones, etiqueta a tus amigos, deja comentarios y muchas cosas mas!!</p>
-				<a href="#registro" class="btn btn-md btn-border c-white" data-toggle="tab" role="tab">Registrarse!</a>
+				<a  class="nav-item nav-link btn btn-md btn-border c-white"
+					href="#registro" data-toggle="tab" role="tab" onclick="abrirRegistro()" >
+					Registrarse!
+				</a>
 			</div>
 		</div>
 
@@ -57,12 +60,12 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" href="#registro" role="tab">
+						<a id="profileBtn" class="nav-link active" data-toggle="tab" href="#profile" role="tab">
 							<svg class="olymp-login-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-login-icon"></use></svg>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+						<a id="registroBtn" class="nav-link" data-toggle="tab" href="#registro" role="tab">
 							<svg class="olymp-register-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-register-icon"></use></svg>
 						</a>
 					</li>
@@ -70,7 +73,7 @@
 
 				<!-- Tab panes -->
 				<div class="tab-content">
-					<div class="tab-pane active" id="registro" role="tabpanel" data-mh="log-tab">
+					<div class="tab-pane" id="registro" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Registrarse</div>
 						<div class="alert alert-success m-1" th:text="${mensaje}"></div>
 						<form method="post" action="/login" class="content" name="registrationForm" >
@@ -115,7 +118,7 @@
 							</div>
 						</form>
 					</div>
-					<div class="tab-pane" id="profile" role="tabpanel" data-mh="log-tab">
+					<div class="tab-pane active" id="profile" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Inicia sesion en tu cuenta</div>
 						<form action="/login" method="post" class="content">
 							<div class="row">
@@ -155,6 +158,17 @@
 			<!-- ... end Login-Registration Form  -->		</div>
 	</div>
 </div>
+
+<script>
+
+	function abrirRegistro() {
+	    $("#registro").addClass("active");
+	    $("#registroBtn").addClass("active");
+	    $("#profile").removeClass("active");
+	    $("#profileBtn").removeClass("active");
+    }
+
+</script>
 
 
 <!-- JS Scripts -->

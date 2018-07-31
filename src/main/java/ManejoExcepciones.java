@@ -6,16 +6,10 @@ public class ManejoExcepciones {
 
     public void manejoExcepciones(){
 
-        exception(NumberFormatException.class, (e, request, response) -> {
-            response.status(500);
-            response.body("Error convertiendo un número....");
-            e.printStackTrace();
-        });
-
-        //otras, ahora la aplicacion nunca estallará :)
+        //ahora la aplicacion nunca estallará :)
         exception(Exception.class, (e, request, response) -> {
-            response.status(500);
-            response.body(e.getMessage());
+            response.status(404);
+            response.redirect("/Page404Error.html");
             e.printStackTrace();
         });
 
