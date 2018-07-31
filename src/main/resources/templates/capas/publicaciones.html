@@ -61,7 +61,7 @@
                            th:onclick="'javascript:likear(\'' + ${publicacion.id} +'\',\''+${usuario.id}+'\');'">
                             <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
                         </a>
-                    </div>
+                </div>
                 <a href="#" class="post-add-icon inline-items">
                     <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
                     <span  th:id="'likes_' + ${publicacion.id}"  th:text="${publicacion.likeCount}"></span>
@@ -73,11 +73,9 @@
 </div>
 
 <script>
-
     function likear(id, usuarioid) {
         var $corazon = $("#me_gusta_" + id);
         var $likes = $("#likes_" + id);
-
         if($corazon.hasClass("bg-primary")){
             $corazon.removeClass("bg-primary");
             $likes.text( parseInt($likes.text()) - 1);
@@ -87,8 +85,5 @@
         }
 
         $.post("/publicacion/likear?publicacionid=" + id + "&usuarioid=" + usuarioid);
-
     }
-
-
 </script>

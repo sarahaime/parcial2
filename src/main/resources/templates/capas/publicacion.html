@@ -50,16 +50,23 @@
                     </div>
                 </div>
 
+                <div class="control-block-button post-control-button">
+                    <a id="me_gusta"  class="btn btn-control"
+                       th:classappend="${publicacion.leGusta} ? bg-primary : '' "
+                       th:onclick="'javascript:likear(\'' + ${publicacion.id} +'\',\''+${usuario.id}+'\');'">
+                        <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                    </a>
+                </div>
+
 
                 <div class="ui-block-title">
                     <h6 class="title">Comentarios: </h6>
                 </div>
 
-                <div class="control-block-button post-control-button">
-                    <a th:id="'publicacion' + ${publicacion.id}" href="#" class="btn btn-control" th:classappend="${publicacion.leGusta} ? bg-primary : '' " th:onclick="'javascript:likear(\''+ ${a} +'\');'">
-                        <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
-                    </a>
-                </div>
+                <a href="#" class="post-add-icon inline-items">
+                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                    <span id="likes_"  th:text="${publicacion.likeCount}"></span>
+                </a>
 
 
                 <!-- Comments -->
@@ -98,3 +105,19 @@
             </article>
         </div>
 </div>
+
+<script>
+    function likear(id, usuarioid) {
+        var $corazon = $("#me_gusta");
+        var $likes = $("#likes_");
+        if($corazon.hasClass("bg-primary")){
+            $corazon.removeClass("bg-primary");
+            $likes.text( parseInt($likes.text()) - 1);
+        }else{
+            $corazon.addClass("bg-primary");
+            $likes.text(parseInt($likes.text())+ 1);
+        }
+
+        $.post("/publicacion/likear?publicacionid=" + id + "&usuarioid=" + usuarioid);
+    }
+</script>
