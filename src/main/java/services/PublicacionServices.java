@@ -49,6 +49,15 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return lista;
     }
 
+    public List<Publicacion> listaPublicacionByCorreo(String correo) {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select p from Publicacion p where p.usuario.correo = :correo");
+        query.setParameter("correo", correo);
+        List<Publicacion> lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
     public List<Publicacion> listaPublicacion(int pagina, int sz) {
         pagina = max(pagina,1);
         EntityManager em = getEntityManager();
