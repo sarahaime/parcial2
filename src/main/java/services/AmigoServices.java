@@ -6,7 +6,9 @@ import modelos.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AmigoServices extends GestionDb<Amigo> {
 
@@ -28,11 +30,23 @@ public class AmigoServices extends GestionDb<Amigo> {
 
         amigo.setAmigo(usuario2);
         amigo.setConfirmado(false);
+        amigo.setSolicitud(false);
+
+        Amigo amigo2 = new Amigo();
+
+        amigo2.setAmigo(usuario1);
+        amigo2.setConfirmado(false);
+        amigo2.setSolicitud(true);
+
 
         //creo la amistad
         crear( amigo );
+        crear( amigo2 );
+
+
 
         usuario1.getAmigos().add(amigo);
+        usuario2.getAmigos().add(amigo2);
         UsuarioServices.getInstancia().editar(usuario1);
 
         //notifico
@@ -48,16 +62,13 @@ public class AmigoServices extends GestionDb<Amigo> {
 
 
     public boolean aceptarAmigo(Usuario usuario1, Usuario usuario2){
-        Amigo amigo = new Amigo();
 
-        amigo.setAmigo(usuario2);
-        amigo.setConfirmado(true);
-
-        //creo la amistad
-        crear( amigo );
-
-        usuario1.getAmigos().add(amigo);
-        UsuarioServices.getInstancia().editar(usuario1);
+        usuario1.getAmigos().forEach(ami->{
+            if(ami.getAmigo().getId().equals( usuario2.getId() )){
+                ami.setConfirmado(true);
+                UsuarioServices.getInstancia().editar(usuario1);
+            }
+        });
 
         usuario2.getAmigos().forEach(ami->{
                  if(ami.getAmigo().getId().equals( usuario1.getId() )){
@@ -65,6 +76,42 @@ public class AmigoServices extends GestionDb<Amigo> {
                 UsuarioServices.getInstancia().editar(usuario2);
             }
         });
+
+        Notificacion n = new Notificacion();
+
+        n.setDescripcion(usuario1.getNombre() + " " + usuario1.getApellido() +" ha aceptado tu solicitud de amistad.");
+        n.setVinculo("/perfil?usuario=" + usuario1.getId());
+        usuario2.getNotificaciones().add(n);
+        UsuarioServices.getInstancia().editar(usuario2);
+
+        return true;
+    }
+
+    public boolean rechazarAmigo(Usuario usuario1, Usuario usuario2){
+
+        Set<Amigo> amigos1 = new HashSet<Amigo>();
+        Set<Amigo> amigos2 = new HashSet<Amigo>();
+
+        usuario1.getAmigos().forEach(ami->{
+            if( ! ami.getAmigo().getId().equals( usuario2.getId() )){
+                amigos1.add(ami);
+            }
+        });
+
+        UsuarioServices.getInstancia().editar(usuario1);
+
+        usuario2.getAmigos().forEach(ami->{
+            if(! ami.getAmigo().getId().equals( usuario1.getId() )){
+                amigos2.add(ami);
+            }
+        });
+
+
+        Notificacion n = new Notificacion();
+        n.setDescripcion(usuario1.getNombre() + " " + usuario1.getApellido() +" ha rechazado tu solicitud de amistad. :(");
+        n.setVinculo("/perfil?usuario=" + usuario1.getId());
+        usuario2.getNotificaciones().add(n);
+        UsuarioServices.getInstancia().editar(usuario2);
 
         return true;
     }

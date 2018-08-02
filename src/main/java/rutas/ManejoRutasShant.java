@@ -135,6 +135,7 @@ public class ManejoRutasShant {
         get("/inicio", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
             Usuario u = UsuarioServices.getLogUser(request);
+            System.out.println(u.getAmigos());
             List<Publicacion> publicaciones = new PublicacionServices().listaPublicacion(u.getId());
 
             for( Publicacion p:publicaciones ){

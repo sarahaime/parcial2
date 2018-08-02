@@ -99,8 +99,16 @@ public class ManejoRutasGenerales {
 
         get("/aceptar", (request, response) -> {
             long amigoid = Long.parseLong(request.queryParams("amigo"));
+            System.out.println(amigoid);
             AmigoServices.getInstancia().aceptarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
-           response.redirect("/perfil?usuario=" + amigoid);
+         //  response.redirect("/perfil?usuario=" + amigoid);
+            return "";
+        });
+
+        get("/rechazar", (request, response) -> {
+            long amigoid = Long.parseLong(request.queryParams("amigo"));
+            AmigoServices.getInstancia().rechazarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
+          // response.redirect("/perfil?usuario=" + amigoid);
             return "";
         });
 

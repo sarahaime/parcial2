@@ -4,6 +4,62 @@
         <!--<a href="/inicio" class="link-find-friend"> Cara de Libro </a>-->
         <div class="control-block">
 
+
+            <div class="control-icon more has-items">
+                <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+                <div class="label-avatar bg-blue">3</div>
+
+                <div class="more-dropdown more-with-triangle triangle-top-center">
+                    <div class="ui-block-title ui-block-title-small">
+                        <h6 class="title">Solicitudes de Amistad</h6>
+                    </div>
+
+                    <div class="mCustomScrollbar" data-mcs-theme="dark">
+                        <ul class="notification-list friend-requests">
+                            <div th:each="amistad : ${usuario.amigos}">
+                                <div th:if="${amistad.solicitud}">
+                                 <li class="accepted"  th:classappend="${amistad.confirmado} ? accepted : '' ">
+                                <div class="author-thumb">
+                                    <img alt="author"  th:src="${amistad.amigo.fotoPerfil}" width="40" height="40" class="author-thumb">
+                                </div>
+                                <div class="notification-event">
+                                    <a href="#" th:href="|/perfil?usuario=${amistad.amigo.id}|"
+                                       class="h6 notification-friend" th:text="${amistad.amigo.nombre} + ' ' + ${amistad.amigo.apellido}">Tamara Romanoff</a>
+                                </div>
+                                     <div th:unless="${amistad.confirmado}" th:id="'amistad_' + ${amistad.id}">
+                                           <span class="notification-icon">
+									<a href="#" th:onclick="'javascript:aceptar(\'' + ${amistad.amigo.id} +'\',\''+${amistad.id}+'\');'" class="accept-request">
+										<span class="icon-add without-text">
+											<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+										</span>
+									</a>
+									<a href="#" class="accept-request request-del" th:onclick="'javascript:rechazar(\''+${amistad.amigo.id}+'\',\''+${amistad.id}+'\');'">
+										<span class="icon-minus">
+											<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
+										</span>
+									</a>
+								</span>
+                                     </div>
+                                     <div th:if="${amistad.confirmado}">
+                                         <div class="more">
+                                             <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                             <svg class="olymp-little-delete"><use xlink:href="svg-icons/sprites/icons.svg#olymp-little-delete"></use></svg>
+                                         </div>
+                                     </div>
+                                <div class="more">
+                                    <svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                </div>
+                            </li>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="view-all bg-blue">Ver más</a>
+                </div>
+            </div>
+
+
             <div class="control-icon more has-items">
                 <svg class="olymp-thunder-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-thunder-icon"></use></svg>
 
@@ -76,3 +132,25 @@
         </div>
     </div>
 </header>
+
+<script>
+
+    function aceptar(amigoid,id) {
+        $("#amistad_" + id).html(" <div class=\"more\">\n" +
+            "                                            <svg class=\"olymp-three-dots-icon\"><use xlink:href=\"svg-icons/sprites/icons.svg#olymp-three-dots-icon\"></use></svg>\n" +
+            "                                            <svg class=\"olymp-little-delete\"><use xlink:href=\"svg-icons/sprites/icons.svg#olymp-little-delete\"></use></svg>\n" +
+            "                                        </div>")
+        $.get("/aceptar?amigo=" + amigoid);
+    }
+
+
+    function rechazar(amigoid,id) {
+        $("#amistad_" + id).html(" <div class=\"more\">\n" +
+            "                                            <svg class=\"olymp-three-dots-icon\"><use xlink:href=\"svg-icons/sprites/icons.svg#olymp-three-dots-icon\"></use></svg>\n" +
+            "                                            <svg class=\"olymp-little-delete\"><use xlink:href=\"svg-icons/sprites/icons.svg#olymp-little-delete\"></use></svg>\n" +
+            "                                        </div>");
+        $.get("/rechazar?amigo=" + amigoid);
+    }
+
+
+</script>

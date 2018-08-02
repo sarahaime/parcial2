@@ -10,13 +10,24 @@ public class Amigo {
     private Long id;
 
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario amigo;
 
 
     @Column(columnDefinition =  "boolean default false")
     boolean confirmado;
+
+    boolean solicitud;
+
+
+    public boolean isSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(boolean solicitud) {
+        this.solicitud = solicitud;
+    }
+
 
     public Amigo(){}
 
