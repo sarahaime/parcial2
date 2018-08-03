@@ -3,15 +3,20 @@ package rutas;
 import com.google.gson.JsonSyntaxException;
 import modelos.ErrorRespuesta;
 import modelos.Publicacion;
+import modelos.Usuario;
 import org.hibernate.annotations.Persister;
 import services.PublicacionServices;
 import services.UsuarioServices;
+import spark.Filter;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 import spark.serialization.Serializer;
 import utilidades.JsonUtilidades;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 
 import static spark.Spark.*;
 
@@ -38,16 +43,26 @@ public class RutasRest {
 
         path("/rest", () -> {
             //filtros especificos:
-            afterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
+            /*fterAfter("/*", (request, response) -> { //indicando que todas las llamadas retorna un json.
                 if (request.headers("Accept").equalsIgnoreCase(ACCEPT_TYPE_XML)) {
                     response.header("Content-Type", ACCEPT_TYPE_XML);
                 } else {
                     response.header("Content-Type", ACCEPT_TYPE_JSON);
                 }
 
-            });
+            });*/
+
+            HashMap<String, String> corsHeaders = new HashMap<>();
+            corsHeaders.put("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+            corsHeaders.put("Access-Control-Allow-Origin", "*");
+            corsHeaders.put("Access-Control-Allow-Headers", "*");
+            corsHeaders.put("Access-Control-Allow-Credentials", "true");
+
+            afterAfter("", (request, response) -> corsHeaders.forEach(response::header));
 
             get("/publicaciones", (req, resp) -> {
+                resp.header("Access-Control-Allow-Origin", "*");
+
                 PublicacionServices publicacionServices = new PublicacionServices();
                 String correo = req.queryParams("correo");
 
@@ -62,23 +77,30 @@ public class RutasRest {
                 return publicacionServices.listaPublicacionByCorreo(correo);
             }, JsonUtilidades.json());
 
-            post("/publicaciones", (req, resp) -> {
-                String descripcion = req.queryMap("descripcion").value();
-                String fecha = req.queryMap("fecha").value();
-                String id = req.queryMap("id").value();
+            post("/publicaciones/crear", (req, resp) -> {
+                resp.header("Access-Control-Allow-Origin", "*");
+
+                String descripcion = req.queryParams("descripcion");
+                String correo = req.queryParams("correo");
 
                 if (descripcion == "") {
                     return "Debe de especificar una descripcion.";
                 }
 
-                if (fecha == "") {
-                    return "Debe de especificar una fecha";
+                if (correo == "") {
+                    return "Debe de especificar un correo";
+                }
+
+                Usuario usuario = new UsuarioServices().getUsuarioByEmail(correo);
+
+                if (usuario == null) {
+                    return "El correo no esta registrado en nuestra base de datos";
                 }
 
                 Publicacion publicacion = new Publicacion();
                 publicacion.setDescripcion(descripcion);
-                publicacion.setFecha(new SimpleDateFormat("mm-dd-yyyy").parse(fecha));
-                publicacion.setUsuario(new UsuarioServices().getUsuario(Long.parseLong(id)));
+                publicacion.setFecha(new Date());
+                publicacion.setUsuario(usuario);
 
                 new PublicacionServices().crear(publicacion);
 
