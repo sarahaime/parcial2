@@ -1,6 +1,5 @@
 package rutas;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import modelos.*;
 import services.*;
 import spark.ModelAndView;
