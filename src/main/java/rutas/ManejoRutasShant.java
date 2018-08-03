@@ -22,6 +22,8 @@ public class ManejoRutasShant {
         File uploadDir = new File("fotos");
         uploadDir.mkdir();
 
+        new RutasRest();
+
         //Usuario admin por defecto
         if (new UsuarioServices().getUsuarioByEmail("admin@admin.com") == null) {
             Usuario usuario = new Usuario();
