@@ -487,30 +487,30 @@
 <script defer src="fonts/fontawesome-all.js"></script>
 
 <script src="Bootstrap/dist/js/bootstrap.bundle.js"></script>
-
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://ichord.github.io/Caret.js/src/jquery.caret.js"></script>
 <script type="text/javascript" src="dist/js/jquery.atwho.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/at.js/1.4.0/css/jquery.atwho.min.css">
 <script type="text/javascript">
     $(function(){
-        var jeremy = decodeURI("J%C3%A9r%C3%A9my") // Jérémy
-        var tags = ["Jacob","Isabella","Ethan","Emma","Michael","Olivia","Alexander","Sophia","William","Ava","Joshua","Emily","Daniel","Madison","Jayden","Abigail","Noah","Chloe","你好","你你你", jeremy];
-        $('#editable').atwho({
+        var at_config = {
             at: "#",
-            data: tags,
-            limit: 200,
-            callbacks: {
-                afterMatchFailed: function(at, el) {
-                    // 32 is spacebar
-                    if (at == '#') {
-                        tags.push(el.text().trim().slice(1));
-                        this.model.save(tags);
-                        this.insert(el.text().trim());
-                        return false;
-                    }
-                }
-            }
-        });
+            data: "http://localhost:4567/amigos",
+            headerTpl: '<div class="atwho-header">Lista de Usuarios<small>&nbsp; ↑&nbsp; ↓&nbsp;</small></div>',
+            insertTpl: '${correo}, ',
+            displayTpl: "<li>${nombre} <small>${correo}</small></li>",
+            limit: 10,
+            searchKey: "nombre"
+        };
+
+        $inputor = $('#inputor').atwho(at_config);
+        // $inputor.caret('pos', 47);
+        $inputor.focus().atwho('run');
+
+        $('#editable1').atwho(at_config);
+        $('#editable2').atwho(at_config);
+
+
     });
 </script>
 <style type="text/css">
@@ -522,7 +522,6 @@
 		color: #4183C4;
 	}
 </style>
-
 
 
 </body>

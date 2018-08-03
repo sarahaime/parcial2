@@ -1,6 +1,7 @@
 package rutas;
 
 import modelos.Album;
+import modelos.Notificacion;
 import modelos.Publicacion;
 import modelos.Usuario;
 import services.*;
@@ -153,12 +154,18 @@ public class ManejoRutasShant {
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
 
             String descripcion = request.queryParams("descripcion");
+            String etiquetas = request.queryParams("etiquetas");
+            descripcion = descripcion + '\n' + "con: " + etiquetas;
+
+            List<String> tagsList = Arrays.asList(etiquetas.split(",[ ]*"));
+
+
 
             Publicacion publicacion = new Publicacion();
-
             publicacion.setDescripcion(descripcion);
             publicacion.setUsuario(UsuarioServices.getLogUser(request));
             publicacion.setFecha(new Date());
+
 
             String img = RutasImagen.guardarImagen("foto", uploadDir, request);
 
@@ -171,6 +178,15 @@ public class ManejoRutasShant {
 
             PublicacionServices.getInstancia().crear(publicacion);
 
+            Usuario u = UsuarioServices.getLogUser(request);
+            for(String correo: tagsList) {
+                Notificacion n = new Notificacion();
+                n.setDescripcion(u.getNombre() + " " + u.getApellido() + " te ha etiquetado en una publicación.");
+                n.setVinculo("/publicacion?id=" + publicacion.getId());
+                Usuario notificado = UsuarioServices.getInstancia().getUsuarioByEmail(correo);
+                notificado.getNotificaciones().add(n);
+                UsuarioServices.getInstancia().editar(notificado);
+            }
 
             response.redirect("/inicio");
 
@@ -202,6 +218,9 @@ public class ManejoRutasShant {
 
             List<Publicacion> publicaciones = new ArrayList<>();
 
+            String etiquetas = request.queryParams("etiquetas");
+            List<String> tagsList = Arrays.asList(etiquetas.split(",[ ]*"));
+
             for(int i = 1; i<=5; i++){
                 String img = RutasImagen.guardarImagen("foto" + i, uploadDir, request);
 
@@ -216,7 +235,7 @@ public class ManejoRutasShant {
 
                 if(i == 1){
                     publicacion.setNaturaleza("ALBUM");
-                    publicacion.setDescripcion(titulo);
+                    publicacion.setDescripcion(titulo + "\n Con: " + etiquetas);
                 } else publicacion.setNaturaleza("ALBUM_FOTO");
 
                 PublicacionServices.getInstancia().crear(publicacion);
@@ -228,6 +247,16 @@ public class ManejoRutasShant {
 
             publicaciones.get(0).setAlbum_id(album.getId());
             PublicacionServices.getInstancia().editar( publicaciones.get(0) );
+
+            Usuario u = UsuarioServices.getLogUser(request);
+            for(String correo: tagsList) {
+                Notificacion n = new Notificacion();
+                n.setDescripcion(u.getNombre() + " " + u.getApellido() + " te ha etiquetado en una publicación.");
+                n.setVinculo("/publicacion?id=" + publicaciones.get(0).getId());
+                Usuario notificado = UsuarioServices.getInstancia().getUsuarioByEmail(correo);
+                notificado.getNotificaciones().add(n);
+                UsuarioServices.getInstancia().editar(notificado);
+            }
 
             response.redirect("/inicio");
 
