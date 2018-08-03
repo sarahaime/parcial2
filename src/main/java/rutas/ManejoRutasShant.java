@@ -2,19 +2,19 @@ package rutas;
 
 import modelos.Album;
 import modelos.Publicacion;
-
-
 import modelos.Usuario;
 import services.*;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
 import javax.servlet.MultipartConfigElement;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class ManejoRutasShant {
 
