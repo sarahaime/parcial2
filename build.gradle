@@ -38,5 +38,8 @@ dependencies {
     //para formularios con imagenes
     compile group: 'javazoom', name: 'jlayer', version: '1.0.1'
 
+    // Libreria
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-http-spi
+    compile group: 'org.eclipse.jetty', name: 'jetty-http-spi', version: '9.4.4.v20170414'
 
 }

@@ -102,6 +102,7 @@ public class RutasRest {
                 publicacion.setFecha(new Date());
                 publicacion.setUsuario(usuario);
 
+
                 new PublicacionServices().crear(publicacion);
 
                 return "Publicacion creada exitosamente.";

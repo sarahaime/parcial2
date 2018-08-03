@@ -2,6 +2,8 @@ import rutas.ManejoRutasGenerales;
 import rutas.ManejoRutasShant;
 import rutas.RutasImagen;
 import services.*;
+import soap.PublicacionWebService;
+import soap.SoapArranque;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,9 +14,15 @@ import static spark.Spark.port;
 import static spark.Spark.staticFiles;
 
 public class Main {
-    public static void main(String[] args)throws SQLException {
+    public static void main(String[] args)throws Exception {
+
+        //Arranque del servidor
+        SoapArranque.stop();
+        SoapArranque.init();
+
         //Iniciando el servicio
         BootStrapServices.startDb();
+
 
         //Prueba de Conexión.
         DB.getInstancia().testConexion();
