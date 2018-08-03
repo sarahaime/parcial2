@@ -3,9 +3,11 @@ package services;
 import modelos.Amigo;
 import modelos.Notificacion;
 import modelos.Usuario;
+import modelos.UsuarioJSON;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -119,9 +121,23 @@ public class AmigoServices extends GestionDb<Amigo> {
 
     public List<Usuario> getAmigosByUsuarioID(long usuarioID){
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select a from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado = true");
+        Query query = em.createQuery("select a.amigo from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado = true");
         query.setParameter("usuarioID", usuarioID);
         List<Usuario> lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
+ public List<UsuarioJSON> getAmigosJSONByUsuarioID(long usuarioID){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select a.amigo from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado = true");
+        query.setParameter("usuarioID", usuarioID);
+         List<Usuario> tmp = query.getResultList();
+        List<UsuarioJSON> lista = new ArrayList<>();
+        for(Usuario u : tmp){
+            lista.add( new UsuarioJSON( u.getId(), u.getUsername(), u.getNombre() + " " + u.getApellido(), u.getCorreo() )  );
+        }
+
         em.close();
         return lista;
     }

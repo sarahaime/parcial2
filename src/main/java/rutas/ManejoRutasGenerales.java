@@ -1,5 +1,6 @@
 package rutas;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import modelos.*;
 import services.*;
 import spark.ModelAndView;
@@ -7,6 +8,7 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import transformaciones.JsonTransformer;
 
 import javax.servlet.MultipartConfigElement;
 import java.util.*;
@@ -25,6 +27,7 @@ public class ManejoRutasGenerales {
 
 
     public void rutas(){
+        JsonTransformer jsonTransformerTransformer = new JsonTransformer();
 
        get("/", (request, response) -> {
            if(UsuarioServices.getLogUser(request) != null)
@@ -117,14 +120,13 @@ public class ManejoRutasGenerales {
             return "";
         });
 
-
-        /*
         get("/amigos", (request, response) -> {
-            Map<String, Object> modelo = new HashMap<>();
-            modelo.put("hola", AmigoServices.getInstancia().getAmigosByUsuarioID(UsuarioServices.getLogUser(request).getId()));
-            return modelo;
-        });
-        */
+            Usuario u = UsuarioServices.getLogUser(request);
+            List<UsuarioJSON> amigos = AmigoServices.getInstancia().getAmigosJSONByUsuarioID(u.getId());
+          //  Map<String, Object> modelo = new HashMap<>();
+            return amigos;
+        }, jsonTransformerTransformer);
+
     }
 
     private static Object procesarParametros(Request request, Response response){
