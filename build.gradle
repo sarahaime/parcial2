@@ -37,6 +37,5 @@ dependencies {
     // https://mvnrepository.com/artifact/javazoom/jlayer
     //para formularios con imagenes
     compile group: 'javazoom', name: 'jlayer', version: '1.0.1'
-
-
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
 }
