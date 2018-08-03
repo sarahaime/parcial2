@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
-	<title>Profile Page</title>
+	<title>Perfil</title>
 
 	<!-- Required meta tags always come first -->
 	<meta charset="utf-8">
@@ -487,6 +487,42 @@
 <script defer src="fonts/fontawesome-all.js"></script>
 
 <script src="Bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ichord.github.io/Caret.js/src/jquery.caret.js"></script>
+<script type="text/javascript" src="dist/js/jquery.atwho.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var jeremy = decodeURI("J%C3%A9r%C3%A9my") // Jérémy
+        var tags = ["Jacob","Isabella","Ethan","Emma","Michael","Olivia","Alexander","Sophia","William","Ava","Joshua","Emily","Daniel","Madison","Jayden","Abigail","Noah","Chloe","你好","你你你", jeremy];
+        $('#editable').atwho({
+            at: "#",
+            data: tags,
+            limit: 200,
+            callbacks: {
+                afterMatchFailed: function(at, el) {
+                    // 32 is spacebar
+                    if (at == '#') {
+                        tags.push(el.text().trim().slice(1));
+                        this.model.save(tags);
+                        this.insert(el.text().trim());
+                        return false;
+                    }
+                }
+            }
+        });
+    });
+</script>
+<style type="text/css">
+	/*override atwho's style*/
+	.atwho-inserted {
+		color: #4183C4;
+	}
+	.atwho-query {
+		color: #4183C4;
+	}
+</style>
+
 
 
 </body>

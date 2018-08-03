@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+	<title>Info</title>
+
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+	<!-- Main Font -->
+	<script src="js/webfontloader.min.js"></script>
+	<script>
+        WebFont.load({
+            google: {
+                families: ['Roboto:300,400,500,700:latin']
+            }
+        });
+	</script>
+
+
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
+
+	<!-- Main Styles CSS -->
+	<link rel="stylesheet" type="text/css" href="css/main.min.css">
+	<link rel="stylesheet" type="text/css" href="css/fonts.min.css">
+
+</head>
+<body>
+
+<div th:replace="capas/barra">
+</div>
+<!-- Header-BP -->
+
+<!-- ... end Responsive Header-BP -->
+<div class="main-header">
+
+
+	<div class="content-bg-wrap bg-account"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col col-lg-8 m-auto col-md-8 col-sm-12 col-10">
+				<div class="main-header-content">
+					<h1>Personaliza tu cuenta</h1>
+					<p>Bienvenido al panel de personalizacion de tu cuenta! Aquí encontrarás todo lo que necesitas para cambiar tu información de perfil.
+						También puedes agregar otras cuentas, tu propia página favorita y mucho mas. ¡Diviértete!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<img class="img-bottom" src="img/account-bottom.png" alt="friends">
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+			<div class="ui-block">
+				<div class="ui-block-title">
+					<h6 class="title"> Informacion Personal</h6>
+				</div>
+				<div class="ui-block-content">
+
+					
+					<!-- Personal Information Form  -->
+
+					<form  method="put" action="/login">
+						<div class="row">
+					
+							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+								<div class="form-group label-floating">
+									<label class="control-label">Nombre</label>
+									<input class="form-control" placeholder="" type="text" name="nombre" type="text" required>
+								</div>
+					
+								<div class="form-group label-floating">
+									<label class="control-label">Email</label>
+									<input class="form-control" placeholder="" name="correo" type="email" required>
+								</div>
+					
+								<div class="form-group date-time-picker label-floating">
+									<label class="control-label">Cumpleaños</label>
+									<input  value="10/24/1984"  name="cumpleanos"/>
+									<span class="input-group-addon">
+															<svg class="olymp-month-calendar-icon icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-month-calendar-icon"></use></svg>
+														</span>
+								</div>
+							</div>
+					
+							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+								<div class="form-group label-floating">
+									<label class="control-label">Apellido</label>
+									<input class="form-control" placeholder="" name="apellido" type="text" required>
+								</div>
+					
+								<div class="form-group label-floating">
+									<label class="control-label">Website</label>
+									<input class="form-control" placeholder="" type="email" value="sysservices.com" name="website">
+								</div>
+					
+					
+								<div class="form-group label-floating is-empty">
+									<label class="control-label">Numero de telefono</label>
+									<input class="form-control" placeholder="" type="text" name="telefono">
+								</div>
+							</div>
+					
+							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+								<div class="form-group label-floating is-select">
+									<label class="control-label">Pais</label>
+									<input class="form-control" placeholder="" type="text" name="pais">
+
+								</div>
+							</div>
+							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+								<div class="form-group label-floating is-select">
+									<label class="control-label">Estado / Provincia</label>
+									<input class="form-control" placeholder="" type="text" name="provincia">
+								</div>
+							</div>
+							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+								<div class="form-group label-floating is-select">
+									<label class="control-label">Ciudad</label>
+									<input class="form-control" placeholder="" type="text" name="ciudad">
+								</div>
+							</div>
+							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+								<div class="form-group label-floating">
+									<label class="control-label">Escribe una breve descripcion acerca de ti</label>
+									<textarea class="form-control" placeholder="" name="descripcion_personal">Hi, I’m James, I’m 36 and I work as a Digital Designer for the  “Daydreams” Agency in Pier 56</textarea>
+								</div>
+					
+								<div class="form-group label-floating is-select">
+									<label class="control-label">Genero</label>
+									<select class="selectpicker form-control">
+										<option value="masculino">Masculino</option>
+										<option value="femenino">Femenino</option>
+									</select>
+								</div>
+					
+								<div class="form-group label-floating is-empty">
+									<label class="control-label">Religion</label>
+									<input class="form-control" placeholder="" type="text" name="religion">
+								</div>
+							</div>
+							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+								<div class="form-group label-floating is-empty">
+									<label class="control-label">Lugar de nacimiento</label>
+									<input class="form-control" placeholder="" type="text" name="lugar_de_nacimiento">
+								</div>
+					
+								<div class="form-group label-floating">
+									<label class="control-label">Ocupacion</label>
+									<input class="form-control" placeholder="" type="text" value="estudiante" name="ocupacion">
+								</div>
+					
+								<div class="form-group label-floating is-select">
+									<label class="control-label">Estado Civil</label>
+									<select class="selectpicker form-control">
+										<option value="casado">Casado</option>
+										<option value="soltero">Soltero</option>
+									</select>
+								</div>
+					
+								<div class="form-group label-floating">
+									<label class="control-label">Inclinacion Politica</label>
+									<input class="form-control" placeholder="" type="text" value="Democratico" name="inclinacion_politica">
+								</div>
+							</div>
+							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="form-group with-icon label-floating">
+									<label class="control-label">Tu cuenta de Facebook</label>
+									<input class="form-control" type="text" value="www.facebook.com/james-spiegel95321" name="facebook">
+									<i class="fab fa-facebook-f c-facebook" aria-hidden="true"></i>
+								</div>
+								<div class="form-group with-icon label-floating">
+									<label class="control-label">Tu cuenta de Twitter</label>
+									<input class="form-control" type="text" value="www.twitter.com/james_spiegelOK" name="twitter">
+									<i class="fab fa-twitter c-twitter" aria-hidden="true"></i>
+								</div>
+
+								<div class="form-group with-icon label-floating is-empty">
+									<label class="control-label">Tu cuenta de Spotify</label>
+									<input class="form-control" type="text" name="spotify">
+									<i class="fab fa-spotify c-spotify" aria-hidden="true"></i>
+								</div>
+							</div>
+							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+								<button class="btn btn-secondary btn-lg full-width">Restaurar todos los campos</button>
+							</div>
+							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+								<button type="submit" class="btn btn-primary btn-lg full-width">Guardar todos los cambios</button>
+							</div>
+					
+						</div>
+					</form>
+					
+					<!-- ... end Personal Information Form  -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- ... end Your Account Personal Information -->
+
+
+<a class="back-to-top" href="#">
+	<img src="svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+</a>
+
+<!-- JS Scripts -->
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery.appear.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<script src="js/perfect-scrollbar.js"></script>
+<script src="js/jquery.matchHeight.js"></script>
+<script src="js/svgxuse.js"></script>
+<script src="js/imagesloaded.pkgd.js"></script>
+<script src="js/Headroom.js"></script>
+<script src="js/velocity.js"></script>
+<script src="js/ScrollMagic.js"></script>
+<script src="js/jquery.waypoints.js"></script>
+<script src="js/jquery.countTo.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/material.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/smooth-scroll.js"></script>
+<script src="js/selectize.js"></script>
+<script src="js/swiper.jquery.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/daterangepicker.js"></script>
+<script src="js/simplecalendar.js"></script>
+<script src="js/fullcalendar.js"></script>
+<script src="js/isotope.pkgd.js"></script>
+<script src="js/ajax-pagination.js"></script>
+<script src="js/Chart.js"></script>
+<script src="js/chartjs-plugin-deferred.js"></script>
+<script src="js/circle-progress.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/run-chart.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/jquery.gifplayer.js"></script>
+<script src="js/mediaelement-and-player.js"></script>
+<script src="js/mediaelement-playlist-plugin.min.js"></script>
+
+<script src="js/base-init.js"></script>
+<script defer src="fonts/fontawesome-all.js"></script>
+
+<script src="Bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+</body>
+</html>

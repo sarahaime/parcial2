@@ -66,15 +66,16 @@
                     </a>
                 </div>
 
+                <a href="#" class="post-add-icon inline-items">
+                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                    <span id="likes_"  th:text="${publicacion.likeCount}"></span>
+                </a>
 
                 <div class="ui-block-title">
                     <h6 class="title">Comentarios: </h6>
                 </div>
 
-                <a href="#" class="post-add-icon inline-items">
-                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
-                    <span id="likes_"  th:text="${publicacion.likeCount}"></span>
-                </a>
+
 
 
                 <!-- Comments -->
@@ -128,4 +129,8 @@
 
         $.post("/publicacion/likear?publicacionid=" + id + "&usuarioid=" + usuarioid);
     }
+
+
+
+
 </script>

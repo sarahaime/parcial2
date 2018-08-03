@@ -22,7 +22,6 @@ public class ManejoRutasShant {
         File uploadDir = new File("fotos");
         uploadDir.mkdir();
 
-
         //Usuario admin por defecto
         if (new UsuarioServices().getUsuarioByEmail("admin@admin.com") == null) {
             Usuario usuario = new Usuario();
@@ -42,7 +41,7 @@ public class ManejoRutasShant {
             usuario.setCiudad("Santiago de los caballeros");
             usuario.setDescripcion_personal("Soy una joven normal... aveces");
             usuario.setGenero("Femenino");
-            usuario.setReligion("Catolica");
+            usuario.setReligion("Católica");
             usuario.setLugar_de_nacimiento("Santiago de los caballeros");
             usuario.setOcupacion("Estudiante");
             usuario.setInclinacion_politica("ninguna");
@@ -125,8 +124,6 @@ public class ManejoRutasShant {
                 Session session = request.session(true);
                 session.attribute("usuario", user);
                 response.redirect("/inicio");
-
-                response.redirect("/login?register=true");
             }
 
             return null;

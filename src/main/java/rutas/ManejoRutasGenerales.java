@@ -1,9 +1,6 @@
 package rutas;
 
-import modelos.Amigo;
-import modelos.LikePublicacion;
-import modelos.Publicacion;
-import modelos.Usuario;
+import modelos.*;
 import services.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -76,12 +73,20 @@ public class ManejoRutasGenerales {
             Publicacion publicacion = PublicacionServices.getInstancia().find(Long.parseLong(request.queryParams("id")));
             Usuario amigo = UsuarioServices.getInstancia().getUsuario( publicacion.getUsuario().getId() );
 
+            Usuario u = UsuarioServices.getLogUser(request);
+
             modelo.put("usuario", UsuarioServices.getLogUser(request));
             modelo.put("amigo", amigo);
 
+
             if( publicacion.getAlbum_id() != null){
-                modelo.put("album", AlbumServices.getInstancia().find(publicacion.getAlbum_id()));
+                Album album = AlbumServices.getInstancia().find(publicacion.getAlbum_id());
+                for( Publicacion p:album.getFotos() ){
+                    p.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(p.getId(), u.getId()));
+                }
+                modelo.put("album",album);
             }else{
+                publicacion.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(publicacion.getId(), u.getId()));
                 modelo.put("publicacion", publicacion);
             }
 
@@ -93,7 +98,7 @@ public class ManejoRutasGenerales {
         get("/solicitar", (request, response) -> {
             long amigoid = Long.parseLong(request.queryParams("amigo"));
             AmigoServices.getInstancia().solicitarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
-            response.redirect("/perfil?usuario=" + amigoid);
+            //response.redirect("/perfil?usuario=" + amigoid);
            return "";
         });
 

@@ -31,10 +31,12 @@ public class PublicacionServices extends GestionDb<Publicacion>{
 
     public List<Publicacion> listaPublicacion(long usuarioID ) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select p from Publicacion p where  p.usuario in" +
-                " ( select a from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado = true) " +
+        Query query = em.createQuery("select p from Publicacion p where  p.usuario.id =:miid or p.usuario.id in" +
+                " ( select a.amigo.id from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado=:valor) " +
                 "order by p.id desc");
         query.setParameter("usuarioID", usuarioID);
+        query.setParameter("miid", usuarioID);
+        query.setParameter("valor", true);
         List<Publicacion> lista = query.getResultList();
         em.close();
         return lista;
