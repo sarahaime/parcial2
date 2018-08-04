@@ -131,6 +131,7 @@ public class ManejoRutasGenerales {
             Usuario u = UsuarioServices.getLogUser(request);
             List<UsuarioJSON> amigos = AmigoServices.getInstancia().getAmigosJSONByUsuarioID(u.getId());
           //  Map<String, Object> modelo = new HashMap<>();
+            if(amigos == null) return "";
             return amigos;
         }, jsonTransformerTransformer);
 

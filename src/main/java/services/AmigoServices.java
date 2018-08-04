@@ -132,7 +132,7 @@ public class AmigoServices extends GestionDb<Amigo> {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("select a.amigo from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado = true");
         query.setParameter("usuarioID", usuarioID);
-         List<Usuario> tmp = query.getResultList();
+        List<Usuario> tmp = query.getResultList();
         List<UsuarioJSON> lista = new ArrayList<>();
         for(Usuario u : tmp){
             lista.add( new UsuarioJSON( u.getId(), u.getUsername(), u.getNombre() + " " + u.getApellido(), u.getCorreo() )  );
