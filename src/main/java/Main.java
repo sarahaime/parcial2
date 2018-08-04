@@ -15,10 +15,6 @@ import static spark.Spark.staticFiles;
 
 public class Main {
     public static void main(String[] args)throws Exception{
-        //Arranque del servidor
-        SoapArranque.stop();
-        SoapArranque.init();
-
 
         //Iniciando el servicio
         BootStrapServices.startDb();
@@ -41,15 +37,20 @@ public class Main {
 
         //Las rutas
         new RutasImagen().rutas();
+        //Arranque del servidor
+        // SoapArranque.stop();
+
         new ManejoRutasGenerales().rutas();
         new ManejoRutasShant().rutas();
 
         new RutasRest().RutasRest();
 
+        SoapArranque.init();
 
        new Filtros().aplicarFiltros();
 
        new ManejoExcepciones().manejoExcepciones();
+
 
 
     }
