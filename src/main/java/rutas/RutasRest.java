@@ -14,6 +14,8 @@ import spark.Spark;
 import spark.serialization.Serializer;
 import utilidades.JsonUtilidades;
 
+import javax.servlet.MultipartConfigElement;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +30,9 @@ public class RutasRest {
     public final static int ERROR_INTERNO = 500;
 
     public void RutasRest() {
+        File uploadDir = new File("fotos");
+        uploadDir.mkdir();
+
         //Manejo de Excepciones.
         exception(JsonSyntaxException.class, (exception, request, response) -> {
             manejarError(RutasRest.BAD_REQUEST, exception, request, response);
@@ -80,8 +85,13 @@ public class RutasRest {
             post("/publicaciones/crear", (req, resp) -> {
                 resp.header("Access-Control-Allow-Origin", "*");
 
+                //super importante, para leer los campos ya se se codifican diferente gracias a la imagen
+                req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
                 String descripcion = req.queryParams("descripcion");
                 String correo = req.queryParams("correo");
+
+                System.out.println("La real descripcion: " + descripcion);
 
                 if (descripcion == "") {
                     return "Debe de especificar una descripcion.";
@@ -101,6 +111,13 @@ public class RutasRest {
                 publicacion.setDescripcion(descripcion);
                 publicacion.setFecha(new Date());
                 publicacion.setUsuario(usuario);
+
+                /**Para las imagenes**/
+                String img = RutasImagen.guardarImagen("foto", uploadDir, req);
+                publicacion.setImg(img);
+                publicacion.setMuro_de(usuario.getId());
+                if(!"-1".equalsIgnoreCase(img)) publicacion.setNaturaleza("FOTO");
+
 
                 new PublicacionServices().crear(publicacion);
 

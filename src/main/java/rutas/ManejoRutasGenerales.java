@@ -100,7 +100,7 @@ public class ManejoRutasGenerales {
         get("/solicitar", (request, response) -> {
             long amigoid = Long.parseLong(request.queryParams("amigo"));
             AmigoServices.getInstancia().solicitarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
-            response.redirect("/perfil?usuario=" + amigoid);
+            response.redirect("/inicio");
            return "";
         });
 
