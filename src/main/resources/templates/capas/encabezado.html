@@ -7,7 +7,7 @@
 
             <div class="control-icon more has-items">
                 <svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-                <div class="label-avatar bg-blue">3</div>
+                <div class="label-avatar bg-blue" th:text="${usuario.amigos.size()}"></div>
 
                 <div class="more-dropdown more-with-triangle triangle-top-center">
                     <div class="ui-block-title ui-block-title-small">
@@ -63,7 +63,8 @@
             <div class="control-icon more has-items">
                 <svg class="olymp-thunder-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-thunder-icon"></use></svg>
 
-                <!--<div class="label-avatar bg-primary" th:text=" ${#lists.size(usuario.notificaciones)}"></div>-->
+                <div class="label-avatar bg-red" th:text="${usuario.notificaciones.size()}"></div>
+
 
                 <div class="more-dropdown more-with-triangle triangle-top-center">
                     <div class="ui-block-title ui-block-title-small">
