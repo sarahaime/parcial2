@@ -27,7 +27,7 @@ public class RutasRest {
     public final static int BAD_REQUEST = 400;
     public final static int ERROR_INTERNO = 500;
 
-    public RutasRest() {
+    public void RutasRest() {
         //Manejo de Excepciones.
         exception(JsonSyntaxException.class, (exception, request, response) -> {
             manejarError(RutasRest.BAD_REQUEST, exception, request, response);

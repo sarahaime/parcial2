@@ -1,6 +1,7 @@
 import rutas.ManejoRutasGenerales;
 import rutas.ManejoRutasShant;
 import rutas.RutasImagen;
+import rutas.RutasRest;
 import services.BootStrapServices;
 import services.DB;
 import soap.SoapArranque;
@@ -42,6 +43,8 @@ public class Main {
         new RutasImagen().rutas();
         new ManejoRutasGenerales().rutas();
         new ManejoRutasShant().rutas();
+
+        new RutasRest().RutasRest();
 
 
        new Filtros().aplicarFiltros();

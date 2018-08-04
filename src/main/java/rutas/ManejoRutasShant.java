@@ -144,7 +144,7 @@ public class ManejoRutasShant {
 
             modelo.put("publicaciones", publicaciones );
             modelo.put("usuario", u);
-            modelo.put("usuarios", UsuarioServices.getInstancia().findAll());
+            modelo.put("usuarios", UsuarioServices.getInstancia().getEnemigos(u.getId()));
             return renderThymeleaf(modelo,"/inicio");
         });
 
@@ -155,8 +155,9 @@ public class ManejoRutasShant {
 
             String descripcion = request.queryParams("descripcion");
             String etiquetas = request.queryParams("etiquetas");
-            descripcion = descripcion + '\n' + "con: " + etiquetas;
-
+            if(etiquetas.length() > 3) {
+                descripcion = descripcion + '\n' + "con: " + etiquetas;
+            }
             List<String> tagsList = Arrays.asList(etiquetas.split(",[ ]*"));
 
 
@@ -179,15 +180,20 @@ public class ManejoRutasShant {
             PublicacionServices.getInstancia().crear(publicacion);
 
             Usuario u = UsuarioServices.getLogUser(request);
-            for(String correo: tagsList) {
-                Notificacion n = new Notificacion();
-                n.setDescripcion(u.getNombre() + " " + u.getApellido() + " te ha etiquetado en una publicación.");
-                n.setVinculo("/publicacion?id=" + publicacion.getId());
-                Usuario notificado = UsuarioServices.getInstancia().getUsuarioByEmail(correo);
-                notificado.getNotificaciones().add(n);
-                UsuarioServices.getInstancia().editar(notificado);
-            }
+            for (String correo : tagsList) {
+                try {
 
+                    Notificacion n = new Notificacion();
+                    n.setDescripcion(u.getNombre() + " " + u.getApellido() + " te ha etiquetado en una publicación.");
+                    n.setVinculo("/publicacion?id=" + publicacion.getId());
+                    Usuario notificado = UsuarioServices.getInstancia().getUsuarioByEmail(correo);
+                    notificado.getNotificaciones().add(n);
+                    UsuarioServices.getInstancia().editar(notificado);
+
+                }catch (Exception r){
+
+                }
+            }
             response.redirect("/inicio");
 
             return "";
@@ -235,7 +241,10 @@ public class ManejoRutasShant {
 
                 if(i == 1){
                     publicacion.setNaturaleza("ALBUM");
-                    publicacion.setDescripcion(titulo + "\n Con: " + etiquetas);
+                    if(etiquetas.length() > 3) {
+                        titulo = titulo + "\n\r" + "\ncon: " + etiquetas;
+                    }
+                    publicacion.setDescripcion(titulo);
                 } else publicacion.setNaturaleza("ALBUM_FOTO");
 
                 PublicacionServices.getInstancia().crear(publicacion);
@@ -250,12 +259,16 @@ public class ManejoRutasShant {
 
             Usuario u = UsuarioServices.getLogUser(request);
             for(String correo: tagsList) {
-                Notificacion n = new Notificacion();
-                n.setDescripcion(u.getNombre() + " " + u.getApellido() + " te ha etiquetado en una publicación.");
-                n.setVinculo("/publicacion?id=" + publicaciones.get(0).getId());
-                Usuario notificado = UsuarioServices.getInstancia().getUsuarioByEmail(correo);
-                notificado.getNotificaciones().add(n);
-                UsuarioServices.getInstancia().editar(notificado);
+                try {
+                    Notificacion n = new Notificacion();
+                    n.setDescripcion(u.getNombre() + " " + u.getApellido() + " te ha etiquetado en una publicación.");
+                    n.setVinculo("/publicacion?id=" + publicaciones.get(0).getId());
+                    Usuario notificado = UsuarioServices.getInstancia().getUsuarioByEmail(correo);
+                    notificado.getNotificaciones().add(n);
+                    UsuarioServices.getInstancia().editar(notificado);
+                } catch (Exception e) {
+
+                }
             }
 
             response.redirect("/inicio");

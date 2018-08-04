@@ -41,5 +41,7 @@ dependencies {
     // Libreria
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-http-spi
     compile group: 'org.eclipse.jetty', name: 'jetty-http-spi', version: '9.4.4.v20170414'
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.4'
 
 }

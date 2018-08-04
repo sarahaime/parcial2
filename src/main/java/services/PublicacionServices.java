@@ -56,6 +56,11 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         Query query = em.createQuery("select p from Publicacion p where p.usuario.correo = :correo");
         query.setParameter("correo", correo);
         List<Publicacion> lista = query.getResultList();
+
+        for (Publicacion p : lista){
+            p.setUsuario(null);
+        }
+
         em.close();
         return lista;
     }

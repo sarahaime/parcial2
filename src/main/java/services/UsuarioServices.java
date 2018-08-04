@@ -79,6 +79,17 @@ public class UsuarioServices extends GestionDb<Usuario> {
         return true;
     }
 
+    public List<Usuario> getEnemigos(long usuarioID){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select usr from Usuario usr where usr.id <>:usrid and usr.id not in" +
+                " ( select a.amigo.id from Usuario u JOIN u.amigos a where u.id =:usuarioID)");
+        query.setParameter("usuarioID", usuarioID);
+        query.setParameter("usrid", usuarioID);
+        List<Usuario> lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
     public boolean actualizarUsuario(Usuario usuario){
         editar(usuario);
         return true;
