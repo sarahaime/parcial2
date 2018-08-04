@@ -22,3 +22,9 @@ Una vez seleccionado un usuario debe mostrarse de la siguiente manera:
 Al clickear la opcion "ver mas", se pueden apreciar las cantidades de likes y comentarios de las publicaciones.
 
 ![ver mas](https://user-images.githubusercontent.com/16060112/43677638-10771f0e-97ba-11e8-983e-9b214d252c6e.jpg)
+
+Dentro del perfil de usuario se pueden incluir sus otras redes sociales.
+
+![social](https://user-images.githubusercontent.com/16060112/43677671-cc8ec912-97ba-11e8-8164-6d1fdc6ce8b8.jpg)
+
+Nota: se utilizó el atributo target="_blank" para que no se cambie de la pestaña actual si se clickea algun icono de la red social.
