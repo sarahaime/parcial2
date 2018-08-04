@@ -46,6 +46,14 @@ public class ManejoRutasGenerales {
             return "";
         });
 
+        get("/cuenta", (request, response) -> {
+            Map<String, Object> modelo = new HashMap<>();
+            Usuario u = UsuarioServices.getLogUser(request);
+            modelo.put("usuario", u);
+            return renderThymeleaf(modelo,"/cuenta");
+        });
+
+
 
         post("/comentar", (request, response) -> {
             ComentarioServices cs = new ComentarioServices();
