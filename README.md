@@ -1,7 +1,10 @@
 # Una red Social con Spark Java
 Proyecto final de Programacion Web/Internet Avanzado 2018.
 ### Realizado por: Sarahime Rodriguez y Shantall Giron
+________________________________________________________________________________________________________________________________________
 
+Nota: Para ir al repositorio de los clientes de servicios REST y SOAP dar click en el enlace: https://github.com/shantgiron/serviciosRest-Soap
+________________________________________________________________________________________________________________________________________
 Usuario admin por defecto:
 Correo: admin@admin.com
 Contraseña: admin
