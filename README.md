@@ -39,3 +39,6 @@ En caso de que el usuario trate de buscar algun recurso que no existe:
 
 ![404 1](https://user-images.githubusercontent.com/16060112/43677782-bc2999ba-97bc-11e8-9d1a-b52867928b17.png)
 
+También se puede personalizar más al usuario agregandole foto de perfil y/o de portada, como se muestra:
+![untitled](https://user-images.githubusercontent.com/37910237/43678819-239ed9fe-97e8-11e8-8980-57dd0971c6d1.png)
+
