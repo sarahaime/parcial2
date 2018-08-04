@@ -48,9 +48,9 @@ public class ManejoRutasShant {
             usuario.setLugar_de_nacimiento("Santiago de los caballeros");
             usuario.setOcupacion("Estudiante");
             usuario.setInclinacion_politica("ninguna");
-            usuario.setFacebook("www.facebook.com/admin");
-            usuario.setTwitter("www.twitter.com/admin");
-            usuario.setSpotify("www.spotify.com/sgiron");
+            usuario.setFacebook("https://www.facebook.com/admin");
+            usuario.setTwitter("https://www.twitter.com/admin");
+            usuario.setSpotify("https//www.spotify.com/sgiron");
 
             new UsuarioServices().crearUsuario(usuario);
         }
