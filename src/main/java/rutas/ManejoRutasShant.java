@@ -117,8 +117,11 @@ public class ManejoRutasShant {
 
                 usuario.setFotoPerfil("/img/badge3.png");
                 usuario.setFotoPortada("/img/top-header1.jpg");
-                usuario.setAdmin(true);
+                usuario.setAdmin(false);
 
+                usuario.setFacebook("https://www.facebook.com/admin");
+                usuario.setTwitter("https://www.twitter.com/admin");
+                usuario.setSpotify("https//www.spotify.com/sgiron");
 
                 new UsuarioServices().crearUsuario(usuario);
 
