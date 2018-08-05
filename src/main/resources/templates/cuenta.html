@@ -79,17 +79,17 @@
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<div class="form-group label-floating">
 									<label class="control-label">Nombre</label>
-									<input class="form-control" placeholder="" name="nombre" type="text" required>
+									<input th:value="${usuario.nombre}" class="form-control" placeholder="" name="nombre" type="text" required>
 								</div>
 					
 								<div class="form-group label-floating">
 									<label class="control-label">Email</label>
-									<input class="form-control" placeholder="" name="correo" type="email" required>
+									<input th:value="${usuario.correo}" class="form-control" placeholder="" name="correo" type="email" required>
 								</div>
 					
 								<div class="form-group date-time-picker label-floating">
 									<label class="control-label">Cumpleaños</label>
-									<input  value="10/24/1984"  name="cumpleanos"/>
+									<input th:value="${usuario.fecha_nacimiento}" value="10/24/1984"  name="cumpleanos"/>
 									<span class="input-group-addon">
 															<svg class="olymp-month-calendar-icon icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-month-calendar-icon"></use></svg>
 														</span>
@@ -99,44 +99,44 @@
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<div class="form-group label-floating">
 									<label class="control-label">Apellido</label>
-									<input class="form-control" placeholder="" name="apellido" type="text" required>
+									<input th:value="${usuario.apellido}"class="form-control" placeholder="" name="apellido" type="text" required>
 								</div>
 					
 								<div class="form-group label-floating">
 									<label class="control-label">Website</label>
-									<input class="form-control" placeholder="" type="email" value="sysservices.com" name="website">
+									<input th:value="${usuario.website}" class="form-control" placeholder="" type="email" value="sysservices.com" name="website">
 								</div>
 					
 					
 								<div class="form-group label-floating is-empty">
 									<label class="control-label">Numero de telefono</label>
-									<input class="form-control" placeholder="" type="text" name="telefono">
+									<input th:value="${usuario.telefono}" class="form-control" placeholder="" type="text" name="telefono">
 								</div>
 							</div>
 					
 							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
 								<div class="form-group label-floating is-select">
 									<label class="control-label">Pais</label>
-									<input class="form-control" placeholder="" type="text" name="pais">
+									<input th:value="${usuario.pais}"class="form-control" placeholder="" type="text" name="pais">
 
 								</div>
 							</div>
 							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
 								<div class="form-group label-floating is-select">
 									<label class="control-label">Estado / Provincia</label>
-									<input class="form-control" placeholder="" type="text" name="provincia">
+									<input th:value="${usuario.provincia}"class="form-control" placeholder="" type="text" name="provincia">
 								</div>
 							</div>
 							<div class="col col-lg-4 col-md-4 col-sm-12 col-12">
 								<div class="form-group label-floating is-select">
 									<label class="control-label">Ciudad</label>
-									<input class="form-control" placeholder="" type="text" name="ciudad">
+									<input th:value="${usuario.ciudad}" class="form-control" placeholder="" type="text" name="ciudad">
 								</div>
 							</div>
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<div class="form-group label-floating">
 									<label class="control-label">Escribe una breve descripcion acerca de ti</label>
-									<textarea class="form-control" placeholder="" name="descripcion_personal">Hi, I’m James, I’m 36 and I work as a Digital Designer for the  “Daydreams” Agency in Pier 56</textarea>
+									<textarea th:text="${usuario.descripcion_personal}" class="form-control" placeholder="" name="descripcion_personal">Hi, I’m James, I’m 36 and I work as a Digital Designer for the  “Daydreams” Agency in Pier 56</textarea>
 								</div>
 					
 								<div class="form-group label-floating is-select">
@@ -149,18 +149,18 @@
 					
 								<div class="form-group label-floating is-empty">
 									<label class="control-label">Religion</label>
-									<input class="form-control" placeholder="" type="text" name="religion">
+									<input th:value="${usuario.religion}"class="form-control" placeholder="" type="text" name="religion">
 								</div>
 							</div>
 							<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 								<div class="form-group label-floating is-empty">
 									<label class="control-label">Lugar de nacimiento</label>
-									<input class="form-control" placeholder="" type="text" name="lugar_de_nacimiento">
+									<input th:value="${usuario.lugar_nacimiento}"class="form-control" placeholder="" type="text" name="lugar_de_nacimiento">
 								</div>
 					
 								<div class="form-group label-floating">
 									<label class="control-label">Ocupacion</label>
-									<input class="form-control" placeholder="" type="text" value="estudiante" name="ocupacion">
+									<input th:value="${usuario.ocupacion}"class="form-control" placeholder="" type="text" value="estudiante" name="ocupacion">
 								</div>
 					
 								<div class="form-group label-floating is-select">
@@ -173,24 +173,24 @@
 					
 								<div class="form-group label-floating">
 									<label class="control-label">Inclinacion Politica</label>
-									<input class="form-control" placeholder="" type="text" value="Democratico" name="inclinacion_politica">
+									<input th:value="${usuario.inclinacion_politica}"class="form-control" placeholder="" type="text" value="Democratico" name="inclinacion_politica">
 								</div>
 							</div>
 							<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="form-group with-icon label-floating">
 									<label class="control-label">Tu cuenta de Facebook</label>
-									<input class="form-control" type="text" value="www.facebook.com/james-spiegel95321" name="facebook">
+									<input th:value="${usuario.facebook}"class="form-control" type="text" value="www.facebook.com/james-spiegel95321" name="facebook">
 									<i class="fab fa-facebook-f c-facebook" aria-hidden="true"></i>
 								</div>
 								<div class="form-group with-icon label-floating">
 									<label class="control-label">Tu cuenta de Twitter</label>
-									<input class="form-control" type="text" value="www.twitter.com/james_spiegelOK" name="twitter">
+									<input th:value="${usuario.twitter}"class="form-control" type="text" value="www.twitter.com/james_spiegelOK" name="twitter">
 									<i class="fab fa-twitter c-twitter" aria-hidden="true"></i>
 								</div>
 
 								<div class="form-group with-icon label-floating is-empty">
 									<label class="control-label">Tu cuenta de Spotify</label>
-									<input class="form-control" type="text" name="spotify">
+									<input th:value="${usuario.spotify}"class="form-control" type="text" name="spotify">
 									<i class="fab fa-spotify c-spotify" aria-hidden="true"></i>
 								</div>
 							</div>

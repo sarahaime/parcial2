@@ -135,6 +135,33 @@ public class ManejoRutasGenerales {
             return amigos;
         }, jsonTransformerTransformer);
 
+        post("/cuenta", (request, response)->{
+            Usuario u = UsuarioServices.getLogUser(request);
+            u.setNombre( request.queryParams("nombre"));
+            u.setApellido(request.queryParams("apellido"));
+            u.setCorreo(request.queryParams("correo"));
+            //u.setContrasena(request.queryParams("contrasena"));
+           // u.setCumpleanos( new Date(request.queryParams("cumpleanos"));
+            u.setWebsite(request.queryParams("website"));
+            u.setTelefono(request.queryParams("telefono"));
+            u.setPais(request.queryParams("pais"));
+            u.setProvincia(request.queryParams("provincia"));
+            u.setCiudad(request.queryParams("ciudad"));
+            u.setDescripcion_personal(request.queryParams("descripcion_personal"));
+            u.setGenero(request.queryParams("genero"));
+            u.setReligion(request.queryParams("religion"));
+            u.setLugar_de_nacimiento(request.queryParams("lugar_de_nacimiento"));
+            u.setOcupacion(request.queryParams("ocupacion"));
+            u.setInclinacion_politica(request.queryParams("inclinacion_politica"));
+            u.setFacebook(request.queryParams("facebook"));
+            u.setTwitter(request.queryParams("twitter"));
+            u.setSpotify(request.queryParams("spotify"));
+            UsuarioServices.getInstancia().editar(u);
+
+            response.redirect("/perfil?usuario=" + u.getId());
+            return "";
+        });
+
     }
 
     private static Object procesarParametros(Request request, Response response){
