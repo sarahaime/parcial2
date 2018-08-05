@@ -1,6 +1,10 @@
 # Una red Social con Spark Java
 Proyecto final de Programacion Web/Internet Avanzado 2018.
+### Realizado por: Sarahime Rodriguez y Shantall Giron
+________________________________________________________________________________________________________________________________________
 
+Nota: Para ir al repositorio de los clientes de servicios REST y SOAP dar click en el enlace: https://github.com/shantgiron/serviciosRest-Soap
+________________________________________________________________________________________________________________________________________
 Usuario admin por defecto:
 Correo: admin@admin.com
 Contraseña: admin
@@ -28,3 +32,13 @@ Dentro del perfil de usuario se pueden incluir sus otras redes sociales.
 ![social](https://user-images.githubusercontent.com/16060112/43677671-cc8ec912-97ba-11e8-8164-6d1fdc6ce8b8.jpg)
 
 Nota: se utilizó el atributo target="_blank" para que no se cambie de la pestaña actual si se clickea algun icono de la red social.
+
+En caso de que el usuario trate de buscar algun recurso que no existe:
+
+![404](https://user-images.githubusercontent.com/16060112/43677780-afe9a794-97bc-11e8-81cd-bb32ff3d6eb4.png)
+
+![404 1](https://user-images.githubusercontent.com/16060112/43677782-bc2999ba-97bc-11e8-9d1a-b52867928b17.png)
+
+También se puede personalizar más al usuario agregandole foto de perfil y/o de portada, como se muestra:
+![untitled](https://user-images.githubusercontent.com/37910237/43678819-239ed9fe-97e8-11e8-8980-57dd0971c6d1.png)
+
