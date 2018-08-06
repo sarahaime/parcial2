@@ -11,6 +11,10 @@ Contraseña: admin
 
 ![login](https://user-images.githubusercontent.com/16060112/43677550-81793b1c-97b8-11e8-9ad7-0225d7d4ed6b.png)
 
+Funcionalidad de dar "likes"
+![likes](https://user-images.githubusercontent.com/37910237/43692204-945880f8-98f3-11e8-9e1d-650cf2290660.png)
+
+
 Notificaciones de eventos
 
 ![fb](https://user-images.githubusercontent.com/16060112/43677588-2c813028-97b9-11e8-8311-829ce4a4468c.jpg)
